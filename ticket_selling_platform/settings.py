@@ -20,8 +20,8 @@ from django.contrib.messages import constants as message_constants
 load_dotenv()
 
 # Set Stripe secret key and public key 
-STRIPE_SECRET_KEY = ""
-STRIPE_PUBLIC_KEY = ""
+STRIPE_SECRET_KEY = "sk_test_51MfrHlKvlxSITsBdb8u8D5xCpIdv2uSA3VA77oBAaZAZnlU2lbFuf4ztrHZu0jrvm4yf2eYZA58gi5ZtLhJfAP5K00r3hEmEpW"
+STRIPE_PUBLIC_KEY = "pk_test_51MfrHlKvlxSITsBd0rQWZ9J4XNuTGoBv3pcnXwF4re4RcojWIiYxURpSLrBcdGAntIKLuByzfcmBMECTMPaWxDJs00OVvX3rEk"
 
 # Set Stripe API key
 stripe.api_key = STRIPE_SECRET_KEY
