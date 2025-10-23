@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/society/create_event_style.css' %}"/>
+<div class="container">
+  <div class="col-12 card" id="card">
+    <h1 class="text-center my-4">Create an Event</h1>
+    {% include 'partials/messages.html' %}
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group {% if field.errors %}has-error{% endif %}">
+          <label for="{{ field.auto_id }}">
+            {{ field.label }}
+            {% if field.field.required %}
+              <span class="text-danger">*</span>
+            {% endif %}
+          </label>
+          {% if field.name == 'photo' %}
+            <small class="form-text text-muted mb-2">
+              A default photo will be used if no photo is uploaded.
+            </small>
+          {% elif field.name == 'partner_emails' %}
+            <small class="form-text text-muted mb-2">
+              Please enter the email addresses of partner societies separated by commas.
+              For example: society.0@kcl.ac.uk, society.0@ucl.ac.uk
+            </small>
+          {% endif %}
+          <div class="file-input-wrapper">
+            {{ field|add_class:"form-control" }}
+          </div>
+          {% if field.errors %}
+            <p class="help-block">{{ field.errors.as_text }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

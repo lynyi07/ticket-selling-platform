@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/table_style.css' %}"/>
+<h1>List of Societies in {{ user.university.abbreviation }} Student Union</h1>
+{% include "partials/messages.html" %}
+<div class="container">
+  <a href="{% url 'create_society' %}" class="btn btn-primary">Add a New Society</a>
+  <table class="view-table" id="table">
+    <tr>
+      <th>#</th>
+      <th>Society Name</th>
+      <th>Email</th>
+    </tr>
+    {% if object_list %}
+      {% for society in object_list %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ society.name }}</td>
+          <td><a href="mailto:{{ society.email }}">{{ society.email }}</a></td>
+          <td>
+            <form method="post" action="{% url 'delete_society' %}">
+              {% csrf_token %}
+              <input type="hidden" name="society_id" value="{{ society.id }}">
+              <button type="submit" class="btn btn-primary">Delete</button>
+            </form>
+          </td>
+          <td><a href="{% url 'society_profile' society.id %}" class="btn btn-primary">View</a></td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <tr>
+        <td colspan="7">There are no societies in KCL Student Union at the moment.</td>
+      </tr>
+    {% endif %}
+  </table>
+</div>
+{% endblock %}

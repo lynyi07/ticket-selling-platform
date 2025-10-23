@@ -1,0 +1,63 @@
+[
+  {
+    "model": "tsp.user",
+    "pk": 1,
+    "fields": {
+      "university_id": 13,
+      "email": "johndoe@kcl.ac.uk",
+      "password": "pbkdf2_sha256$260000$4BNvFuAWoTT1XVU8D6hCay$KqDCG+bHl8TwYcvA60SGhOMluAheVOnF1PMz0wClilc="
+    }
+  },
+  {
+    "model": "tsp.student",
+    "pk": 2,
+    "fields": {
+      "user_ptr": 1,
+      "first_name": "John",
+      "last_name": "Doe"
+    }
+  },
+  {
+    "model": "tsp.user",
+    "pk": 3,
+    "fields": {
+      "university_id": 13,
+      "email": "kclsu@kcl.ac.uk",
+      "password": "pbkdf2_sha256$260000$4BNvFuAWoTT1XVU8D6hCay$KqDCG+bHl8TwYcvA60SGhOMluAheVOnF1PMz0wClilc=",
+      "role": "STUDENT_UNION"
+    }
+  },
+  {
+    "model": "tsp.studentunion",
+    "pk": 4,
+    "fields": {
+      "user_ptr": 3,
+      "name": "KCLSU"
+    }
+  },
+  {
+    "model": "tsp.user",
+    "pk": 5,
+    "fields": {
+      "university_id": 13,
+      "email": "tech_society@kcl.ac.uk",
+      "password": "pbkdf2_sha256$260000$4BNvFuAWoTT1XVU8D6hCay$KqDCG+bHl8TwYcvA60SGhOMluAheVOnF1PMz0wClilc=",
+      "role": "SOCIETY"
+    }
+  },
+  {
+    "model": "tsp.society",
+    "pk": 6,
+    "fields": {
+      "user_ptr": 5,
+      "name": "KCL Tech society",
+      "student_union": 3,
+      "member_discount": 10,
+      "member_fee": 5,
+      "account_name": "KCL Tech society",
+      "account_number": "00012345",
+      "sort_code": "108800",
+      "stripe_account_id": "acct_1MfrHlKvlxSITsBd"
+    }
+  }
+]

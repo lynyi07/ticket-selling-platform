@@ -1,0 +1,121 @@
+{% load static %}
+{% block body %}
+{% endblock %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/society_profile_style.css' %}"/>
+<div class="society-details">
+  <div id="card">
+    <div id="stats">
+      {% if request.user.role == 'SOCIETY' %}
+        <div class="stat-card">
+          <a href="{% url 'list_follower' %}">
+            <i class="fas fa-users"></i>
+            <span class="stat-number">{{ society.followers.count }}</span>
+            <p>Followers</p>
+          </a>
+        </div>
+        <div class="stat-card">
+          <a href="{% url 'list_subscriber' %}">
+            <i class="fas fa-envelope"></i>
+            <span class="stat-number">{{ society.subscribers.count }}</span>
+            <p>Subscribers</p>
+          </a>
+        </div>
+        <div class="stat-card">
+          <a href="{% url 'list_regular_member' %}">
+            <i class="fas fa-user-friends"></i>
+            <span class="stat-number">{{ society.regular_members.count }}</span>
+            <p>Members</p>
+          </a>
+        </div>
+        <div class="stat-card">
+          <a href="{% url 'member_discount' %}">
+            <i class="fas fa-percentage"></i>
+            <span class="stat-number">{{ society.member_discount }}%</span>
+            <p>Member Discounts</p>
+          </a>
+        </div>
+      {% else %}
+        <div class="stat-card">
+          <i class="fas fa-users"></i>
+          <span class="stat-number">{{ society.followers.count }}</span>
+          <p>Followers</p>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-envelope"></i>
+          <span class="stat-number">{{ society.subscribers.count }}</span>
+          <p>Subscribers</p>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-user-friends"></i>
+          <span class="stat-number">{{ society.regular_members.count }}</span>
+          <p>Members</p>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-percentage"></i>
+          <span class="stat-number">{{ society.member_discount }}%</span>
+          <p>Member Discounts</p>
+        </div>
+      {% endif %}
+    </div>
+    {% if society.most_upcoming_event %}
+      {% with event=society.most_upcoming_event %}
+        <div id="upcoming-events">
+          {% if request.user.role == 'SOCIETY' %}
+            <a href="{% url 'events_list' %}" class="btn btn-secondary">Upcoming events: {{ society.upcoming_events.count }}</a>
+          {% endif %} 
+          <h3>Next event:</h3>
+          <div class="event">
+            {% if request.user.role == 'SOCIETY' %}
+              <a href="{% url 'event_detail' event.id %}" class="event-link">
+            {% else %}
+              <a href="{% url 'event_page' event.id %}" class="event-link">
+            {% endif %}
+            {% if event.photo %}
+              <div class="event-photo">
+                <img src="{{ event.photo.url }}" alt = "Event photo">
+              </div>
+            {% endif %}
+            <div class="event-content">
+              <p>
+                <i class="fas fa-clock"></i>
+                {% if event.start_time|date:"Y" == event.end_time|date:"Y" %}
+                  {{ event.start_time|date:"jS F" }}
+                  {% if event.start_time|date:"j" != event.end_time|date:"j" %}
+                    - {{ event.end_time|date:"jS F Y" }}
+                  {% endif %}
+                {% else %}
+                  {{ event.start_time|date:"jS F" }} - {{ event.end_time|date:"jS F" }}
+                {% endif %}
+              </p>
+              <h4>{{ event.name }}</h4>
+              <p><i class="fas fa-map-marker-alt"></i> {{ event.location }}</p>
+            </div></a>
+          </div>
+        </div>
+      {% endwith %}
+    {% else %}
+      <div id="upcoming-events">
+        {% if request.user.role == 'SOCIETY' %}
+          <a href="{% url 'events_list' %}" class="btn btn-secondary">Upcoming events: {{ society.upcoming_events.count }}</a>
+        {% endif %} 
+        <h3>Next event:</h3>
+        <p class="committee-member-name" style="text-align: center">No events found.</p>
+      </div>
+    {% endif %}
+    <div id="committee-members">
+      {% if request.user.role == 'SOCIETY' %}
+        <a href="{% url 'list_committee_member' %}" class="btn btn-secondary ">Edit</a>
+      {% endif %}
+      <h3>Committee Members: </h3> 
+      <div class="committee-member">
+        {% if society.committee_members %}
+          {% for member in society.committee_members %}
+            <p class="committee-member-name">{{ member.first_name}} {{ member.last_name}}</p>
+          {% endfor %}
+        {% else %}
+          <p class="committee-member-name">No committee members found.</p>
+        {% endif %}
+      </div> 
+    </div>
+  </div>
+</div>

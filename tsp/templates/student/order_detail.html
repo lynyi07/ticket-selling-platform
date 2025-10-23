@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+{% load mathfilters %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/student/order_detail_style.css' %}"/>
+<div class="card-container">
+  <h3>Order Details</h3>
+  <p>Order #: {{ order.id }}</p>
+  <p>Date: {{ order.create_at }}</p>
+  <a href="{% url 'tickets' pk=order.id %}">View Tickets</a>
+  {% if payment %}
+    <p>Billing Address:</p>
+    <div class="shipping-address">
+      <p>{{ order.line_1 }}</p>
+      {% if order.line_2 %}
+        <p>{{ order.line_2 }}</p>
+      {% endif %}
+      <p>{{ order.city_town }}, {{ order.postcode }}</p>
+      <p>{{ order.country }}</p>
+    </div>
+  {% endif %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th style="width: 40%;">Item</th>
+        <th style="width: 15%;">Qty</th>
+        <th style="width: 15%;">Price</th>
+        <th style="width: 15%;">Subtotal</th>
+        <th style="width: 15%;">Discount</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in event_cart_items %}
+        {% if item.early_bird_quantity > 0 %}
+          <tr>
+            <td colspan="5">
+              <a href="{% url 'event_page' item.event.id %}" class="event-link">
+                {{ item.event.name }} (Early Bird)
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {{ item.event.start_time }} - {{ item.event.end_time }}
+            </td>
+            <td>{{ item.early_bird_quantity }}</td> 
+            <td>GBP£{{ item.event.early_bird_price }}</td>
+            <td>
+              GBP£{{ item.event.early_bird_price|mul:item.early_bird_quantity }}
+            </td>
+            {% if item.id in discount_data %}
+              <td>
+                GBP£{{ discount_data|get_item:item.id }}
+              </td>    
+            {% else %}
+              <td> GBP£0.00 </td>
+            {% endif %}
+          </tr>
+        {% endif %}
+        {% if item.standard_quantity > 0 %}
+          <tr>
+            <td colspan="5">
+              <a href="{% url 'event_page' item.event.id %}" class="event-link">
+                {{ item.event.name }} (Standard)
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>{{ item.event.start_time }} - {{ item.event.end_time }}</td>
+            <td>{{ item.standard_quantity }}</td>
+            <td>GBP£{{ item.event.standard_price }}</td>
+            <td>
+              GBP£{{ item.event.standard_price|mul:item.standard_quantity }}
+            </td>
+            {% if item.id in discount_data %}
+              <td>
+                GBP£{{ discount_data|get_item:item.id }}
+              </td>
+            {% else %}
+              <td> GBP£0.00 </td>
+            {% endif %}
+          </tr>
+        {% endif %}
+      {% endfor %}
+      {% for item in memberships %}
+        <tr>
+          <td>
+            <a href="{% url 'society_page' item.id %}" class="event-link">
+              {{ item.name }} Membership
+            </a>
+          </td>
+          <td>{{ 1 }}</td>
+          <td>GBP£{{ item.member_fee }}</td> <!-- price -->
+          <td>GBP£{{ item.member_fee }}</td> <!-- total price -->
+          <td></td>
+        </tr>
+      {% endfor %}
+    </tbody>    
+    <tfoot>
+      {% if total_saved %}
+        <tr>
+          <td class="label">Total Saved:</td>
+          <td class="value" colspan="2">GBP£{{ total_saved }}</td>
+        </tr>
+      {% endif %}
+      <tr>
+        <td class="label">Total:</td>
+        <td class="value" colspan="2">GBP£{{ total_price }}</td>
+      </tr>
+      {% if payment %}
+        <tr>
+          <td class="label">Transaction ID:</td>
+          <td class="value" colspan="2">{{ payment.transaction_id }}</td>
+        </tr>
+        <tr>
+          <td class="label">Payment Details:</td>
+          <td class="value" colspan="2">
+            <span class="card-brand {{ payment.brand|lower }}"></span>
+            **** **** **** {{ payment.last4|slice:'-4:' }}
+          </td>
+        </tr>
+      {% endif %}
+    </tfoot>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+.footer{
+  margin-top: 310px;
+  position: absolute;
+  color: black;
+  background-color: black; 
+  height: 300px; 
+  position: relative; 
+  width: 100%;
+  bottom: 0px;
+  text-align: center;
+}  
+
+.footer label{
+  display: block; 
+  color: white; 
+  font-size: medium;
+  text-align: center;
+}  
+
+.left_side{
+  padding-top: 30px; 
+  columns: 3; 
+}
+
+.left_side label{
+  display: block;
+  color: lightgrey; 
+  font-size: medium;
+  text-align: center;
+}  
+
+.socials{
+  columns: 3;
+} 
+
+.socials a{
+  display: block;
+  color: white; 
+  font-size: large; 
+  text-align: center;  
+} 
+
+.socials a:hover{
+  transition: 0.3s;
+  color: green;
+}
+
+.info{
+  padding-top: 20px; 
+  columns: 3; 
+} 
+
+.info label{
+  display: block;
+  color: white; 
+  font-size: medium;
+  text-align: center;
+} 
+
+.info a{
+  display: block;
+  color: white; 
+  font-size: medium; 
+  text-align: center;
+}
+
+.info a:hover{
+  transition: 0.3s;
+  color: green;
+}

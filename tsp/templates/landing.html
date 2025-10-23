@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'css/slideshow.css' %}"> 
+<link rel="stylesheet" href="{% static 'css/landing_style.css' %}">
+<script defer src="static/animation.js"></script>
+<div class="slider">
+    <div class="slides"> 
+      <figure>
+        <img src="{% static 'slideshow/party1.jpeg' %}" height="1000">
+        <img src="{% static 'slideshow/party2.jpeg' %}" height="1000"> 
+        <img src="{% static 'slideshow/party3.jpeg' %}" height="1000"> 
+      </figure> 
+    </div> 
+    <div class="container">
+      <div class="infront">
+        <div class="firstHeader">
+          <h1>GO FOR IT!</h1>
+        </div>
+        <div class="eventsLink">
+          <label>Scroll Down!</label>
+        </div>
+      </div> 
+    </div>
+</div>   
+<section>
+  <div class="infoHeader">
+    <h1 class="hidden">Made For and By the Students</h1>  
+    <div class="hidden">
+      <div class="infoFirstLine">
+        <label>Dedicated to allowing students to</label> 
+      </div>
+      <br>
+      <div class="infoRest">
+        <label>make events and buy tickets</label> 
+      </div> 
+    </div>
+  </div>  
+</section> 
+<section>
+  <div class="hidden">
+    <div class="split"> 
+      <div class="lowerMiddle"> 
+        <h1>Society</h1> 
+        <p>Make events for the people</p> 
+        <p>View transaction history</p> 
+        <p>See your members</p>
+      </div>
+      <div class="lowerMiddle">
+        <h1>Student</h1> 
+        <p>Browse events</p> 
+        <p>Join societies with memberships</p> 
+        <p>Enjoy email notifications</p>
+      </div>
+      <div class="lowerMiddle">
+        <h1>Student Union</h1> 
+        <p>Watch over your societies</p> 
+        <p>Uni associated</p> 
+        <p>Create societes</p>
+        <p></p>
+      </div>
+    </div> 
+  </div>
+</section> 
+{% endblock %}

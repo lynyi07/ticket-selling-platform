@@ -1,0 +1,18 @@
+[  
+  {
+    "model": "tsp.domain",
+    "pk": 18,
+    "fields": {
+        "name": "qmw.ac.uk",
+        "university": 17
+    }
+  },
+  {
+    "model": "tsp.university",
+    "pk": 17,
+    "fields": {
+        "name": "Queen Mary University of London",
+        "abbreviation": "QMU"
+    }
+  }
+]

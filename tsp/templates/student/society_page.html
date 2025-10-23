@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/society_profile_style.css' %}"/>
+<div class="society-details">
+  <h3>Discover the dynamic world of {{ society.student_union.name}} Society!</h3>  
+  <h1>{{ society.name }}</h1>
+  <h2>{{ society.email }}</h2>
+  <div class="student-buttons d-flex">      
+    <form method="post" action="{% url 'follow_society' %}">
+      {% csrf_token %}
+      <input type="hidden" name="society_pk" value="{{ society.pk }}">
+      {% if is_follower %}
+        <button type="submit" class="btn btn-secondary mr-2">
+          <i class="fas fa-user-check"></i> 
+          Unfollow
+        </button>
+      {% else %}
+        <button type="submit" class="btn btn-secondary mr-2">
+          <i class="fas fa-user-plus"></i> 
+          Follow
+        </button>
+      {% endif %} 
+    </form> 
+    <form method="post" action="{% url 'subscribe_society' %}">
+      {% csrf_token %}
+      <input type="hidden" name="society_pk" value="{{ society.pk }}">
+      {% if is_subscriber %}
+        <button type="submit" class="btn btn-secondary mr-2">
+          <i class="fas fa-bell-slash"></i>
+          Unsubscribe
+        </button>
+      {% else %}
+        <button type="submit" class="btn btn-secondary mr-2">
+          <i class="fas fa-bell"></i>
+          Subscribe
+        </button>
+      {% endif %} 
+    </form>
+    {% if not is_member and society.accept_new_member%}
+      <form method="POST" action="{% url 'buy_membership' %}" class="mr-2">
+        {% csrf_token %}
+        <input type="hidden" name="society_pk" value="{{ society.pk }}">
+        <button type="submit" class="btn btn-secondary">
+          <i class="fas fa-credit-card"></i>
+          Buy membership
+        </button>
+      </form>
+    {% elif is_member %}
+      <a class="btn btn-secondary text-white mr-2">
+        <i class="fas fa-check"></i>
+        You are a member
+      </a> 
+    {% endif %}
+  </div>
+  {% if not is_member and not society.accept_new_member %}
+    <div class="alert alert-warning mt-3" role="alert">
+      This society is currently not accepting new members.
+    </div>
+  {% endif %}
+  {% include 'partials/society_profile_base.html' %}
+</div> 
+{% endblock %}

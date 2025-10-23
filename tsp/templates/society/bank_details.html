@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form_style.css' %}"/>
+<div class="container">
+  <div class="card">
+    <div id="Details">
+      {% if society.account_number %}
+        <p>Account Number: {{ society.account_number }}</p>
+      {% else %}
+        <p>Account Number: N/A</p>
+      {% endif %}
+      {% if society.sort_code %}
+        <p>Sort Code: {{ society.sort_code }}</p>
+      {% else %}
+        <p>Sort Code: N/A</p>
+      {% endif %}
+      {% if society.account_name %}
+        <p>Name on the account: {{ society.account_name }}</p>
+      {% else %}
+        <p>Name on the account: N/A</p>
+      {% endif %}
+    </div>
+    <h1 class="text-center my-4">Modify Bank Details</h1>
+    {% include 'partials/messages.html' %}
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group {% if field.errors %}has-error{% endif %}">
+          {{ field.label_tag }}<span class="text-danger">{% if field.field.required %}*{% endif %}</span>
+          {{ field|add_class:"form-control" }}
+          {% if field.errors %}
+            <p class="help-block">{{ field.errors.as_text }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

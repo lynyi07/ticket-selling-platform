@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/society/events_list_style.css' %}"/>
+<h1>Events</h1>
+<div class="row filter_events d-flex justify-content-center">
+  <div class="select_events col-9">
+    <form method="GET">
+      <div class="d-flex justify-content-center">
+        <div class="form-group col-md-3">
+          <select id="date_filter" name="date_filter" onchange="this.form.submit()">
+          {% for date_option, display in date_options %}
+            <option value="{{ date_option }}"
+              {% if date_option == selected_date_option %}
+                selected
+              {% endif %}>
+              {{ display }}
+            </option>
+          {% endfor %}
+          </select>
+        </div>
+        <div class="form-group col-md-3">
+          <select name="status_filter" onchange="this.form.submit()">
+            {% for status_option, display in status_options %}
+              <option value="{{ status_option }}"
+                {% if status_option == selected_status_option %}
+                  selected
+                {% endif %}>
+                {{ display }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group col-md-3 input-group-sm">
+          <input class="form-control" id="searchbar" type="text" value="{{ search }}" name="search" placeholder="Search" onchange="this.form.submit()">
+        </div>
+        <button type="submit" class="btn btn-sm btn-primary custom-search-button"><i class="fas fa-search"></i></button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="events-container">
+  {% for event in object_list %}
+    <div class="event">
+      <a href="{% url 'event_page' event.id %}" class="event-link">
+        {% if event.photo %}
+          <div class="event-photo">
+            <img src="{{ event.photo.url }}" alt = "Event photo">
+          </div>
+        {% endif %}
+        <div class="event-content">
+          <p>
+            <i class="fas fa-clock"></i>
+            {% if event.start_time|date:"Y" == event.end_time|date:"Y" %}
+              {{ event.start_time|date:"jS F" }}
+              {% if event.start_time|date:"j" != event.end_time|date:"j" %}
+                - {{ event.end_time|date:"jS F Y" }}
+              {% endif %}
+            {% else %}
+              {{ event.start_time|date:"jS F" }} - {{ event.end_time|date:"jS F" }}
+            {% endif %}
+          </p>
+          <h3>{{ event.name }}</h3>
+          <p><i class="fas fa-map-marker-alt"></i> {{ event.location }}</p>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

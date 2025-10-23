@@ -1,0 +1,18 @@
+[
+  {
+    "model": "tsp.domain",
+    "pk": 14,
+    "fields": {
+        "name": "kcl.ac.uk",
+        "university": 13
+    }
+  },
+  {
+    "model": "tsp.university",
+    "pk": 13,
+    "fields": {
+        "name": "King's College London",
+        "abbreviation": "KCL"
+    }
+  }
+]

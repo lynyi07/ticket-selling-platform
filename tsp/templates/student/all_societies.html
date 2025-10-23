@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/student/all_societies_style.css' %}"/>
+<h1>Societies</h1>
+<div class="row filter_societies d-flex justify-content-center">
+  <div class="select_societies col-9">
+    <form method="GET">
+      <div class="d-flex justify-content-center">
+        <div class="form-group col-md-3 input-group-sm">
+          <input class="form-control" id="searchbar" type="text" value="{{ search }}" name="search" placeholder="Search" onchange="this.form.submit()">
+        </div>
+        <button type="submit" class="btn btn-sm btn-primary custom-search-button"><i class="fas fa-search"></i></button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="societies-container">
+  {% for society in object_list %}
+    <div class="societies">
+      <a href="{% url 'society_page' society.id %}" class="societies-link">
+        <h3>{{ society.name }}</h3>
+        <p><i class="fas fa-map-marker-alt"></i> {{ society.university.name }}</p>
+      </a>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+{% load mathfilters %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/student/cart_detail_style.css' %}"/>
+<div class="cart-details">
+  <div class="cart-container">
+    <div class="cart-details cart-left">
+      {% include 'partials/messages.html' %}
+      <h3>Item Summary({{ count }})</h3>
+      {% if not count %}
+        <p>Your shopping cart is empty.</p>
+      {% else %}
+        <form id="update-cart-form" method="post">
+          {% csrf_token %}
+          <table>
+            <thead>
+              <tr>
+                <th><p>Items</p></th>
+                <th><p>Qty</p></th>
+                <th><p>Price</p></th>
+                <th><p>Subtotal</p></th>
+                <th><p>Discount</p></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in event_cart_items %}
+                <input type="hidden" name="event_cart_item_id" value="{{ item.id }}">
+                <tr>
+                  {% if item.early_bird_quantity > 0 %}
+                    <tr>
+                      <td colspan="6">
+                        <a href="{% url 'event_page' item.event.id %}" class="event-link">
+                          {{ item.event.name }} (Early Bird)
+                        </a>
+                      </td>
+                    </tr>
+                    <td>{{ item.event.start_time }} - {{ item.event.end_time }}</td>
+                    <td class="quantity">
+                      <button type="submit" class="quantity-decrement" 
+                              data-event-cart-item-id="{{ item.id }}">-</button>
+                      <input type="number" name="early_bird_quantity" 
+                              id="early_bird_quantity" class="ticket-quantity"
+                              min="0" max="{{ early_bird_availability }}" 
+                              value="{{ item.early_bird_quantity }}"
+                              data-ticket-type="early_bird" 
+                              data-ticket-availability="{{ early_bird_availability }}" readonly>
+                      <button class="quantity-increment" 
+                              data-event-cart-item-id="{{ item.id }}">+</button>
+                    </td>
+                    <td>GBP£{{ item.event.early_bird_price }}</td>
+                    <td>
+                      GBP£{{ item.event.early_bird_price|mul:item.early_bird_quantity }}
+                    </td>
+                    {% if item.id in cart.discount_data %}
+                      <td>
+                        GBP£{{ cart.discount_data|get_item:item.id }}
+                      </td>
+                    {% else %}
+                      <td> GBP£0.00 </td>
+                    {% endif %}
+                    <td></td>
+                  {% endif %}
+                </tr>
+                <tr>
+                  {% if item.standard_quantity > 0 %}
+                    <tr>
+                      <td colspan="6">
+                        <a href="{% url 'event_page' item.event.id %}" class="event-link">
+                          {{ item.event.name }} (Standard)
+                        </a>
+                      </td>
+                    </tr>
+                    <td>{{ item.event.start_time }} - {{ item.event.end_time }}</td>
+                    <td class="quantity">
+                      <button type="button" class="quantity-decrement" 
+                              data-event-cart-item-id="{{ item.id }}">-</button>
+                      <input type="number" name="standard_quantity_{{ item.id }}" 
+                              id="standard_quantity_{{ item.id }}" class="ticket-quantity"
+                              min="0" max="{{ item.standard_max }}" 
+                              value="{{ item.standard_quantity }}"
+                              data-ticket-type="standard" 
+                              data-ticket-availability="{{ item.standard_max }}" readonly>
+                      <button type="button" class="quantity-increment" 
+                              data-event-cart-item-id="{{ item.id }}">+</button>
+                    </td>
+                    <td>GBP£{{ item.event.standard_price }}</td>
+                    <td>
+                      GBP£{{ item.event.standard_price|mul:item.standard_quantity }}
+                    </td>
+                    {% if item.id in cart.discount_data and item.early_bird_quantity == 0%}
+                      <td>
+                        GBP£{{ cart.discount_data|get_item:item.id }}
+                      </td>
+                    {% else %}
+                      <td> GBP£0.00 </td>
+                    {% endif %}
+                  {% endif %}
+                  <td></td>
+                </tr>
+              {% endfor %}
+              {% for membership in memberships %}
+                <tr>
+                  <td>
+                    <a href="{% url 'society_page' membership.id %}" class="event-link">
+                      {{ membership.name }} membership
+                    </a>
+                  </td>
+                  <td class="membership-quantity">
+                    <input type="number" value="1" readonly>
+                  </td>
+                  <td>GBP£{{ membership.member_fee }}</td> <!-- price -->
+                  <td>GBP£{{ membership.member_fee }}</td> <!-- total price -->
+                  <td></td>
+                  <td>
+                    <button class="remove-membership" 
+                            data-membership-id="{{ membership.id }}">
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </form>
+      {% endif %}
+    </div>
+    {% if count %}
+      <div class="cart-details cart-right">
+        <table>
+          <h3>Order Summary</h3>
+          <tr>
+            <td>Total</td>
+            <td><h3 class="total-price">GBP£{{ total_price }}</h3></td>
+          </tr>
+          <tr >
+            {% if total_saved %}
+              <td></td>
+              <td><h6 class="saved" style="float: right,">Already saved: GBP£{{ total_saved }}</h6></td>
+            {% endif %}
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button class="button-checkout" onclick="window.location.href='/checkout/';">
+                Checkout Now
+              </button>
+            </td>
+          </tr>
+        </table>
+        <div class="accepted-payment-methods">
+          <img class="payment-method visa" src="{% static 'images/visa.png' %}">
+          <img class="payment-method mastercard" src="{% static 'images/mastercard.png' %}">
+          <img class="payment-method amex" src="{% static 'images/amex.png' %}">
+          <img class="payment-method union-pay" src="{% static 'images/unionpay.png' %}">
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Set the URL for updating the cart -->
+<script>
+  window.updateCartUrl = "{% url 'update_cart' %}";
+</script>
+
+<!-- Load the cart detail JavaScript file -->
+<script src="{% static 'js/cart_detail.js' %}"></script>
+{% endblock %}

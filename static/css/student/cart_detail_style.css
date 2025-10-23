@@ -1,0 +1,226 @@
+body {
+  background-color: #e9e9e9;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.cart-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 65%;
+  margin: 10px;
+}
+
+.cart-details {
+  flex-grow: 1;
+}
+
+.event-link {
+  color: #1E90FF !important;
+  font-weight: bold;
+}
+
+.cart-left {
+  flex-basis: 60%;
+  width: 60%;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  border: 1px #d3d3d3;
+  color: inherit;
+  text-decoration: none;
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.cart-right {
+  flex-basis: 40%;
+  width: 30%;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  border: 1px #d3d3d3;
+  color: inherit;
+  text-decoration: none;
+  position: absolute;
+  right: 10px;
+  margin-top: 30px;
+  margin-right: 30px;
+}
+
+.cart-details table {
+  width: 100%;
+  border-collapse: collapse;
+}
+  
+.cart-details th,
+.cart-details td {
+  padding: 10px;
+  text-align: left;
+}
+
+.cart-details th {
+  font-weight: bold;
+}
+
+.cart-details .quantity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+.cart-details .quantity button {
+  display: inline-flex;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.cart-details .quantity input {
+  width: 100px;
+  padding: 5px 10px;
+  text-align: center !important;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: not-allowed;
+}
+
+.cart-details .quantity input:focus {
+  outline: none;
+}
+
+.cart-details .membership-quantity {
+  align-items: center !important;
+  text-align: center !important;
+  cursor: not-allowed; 
+}
+
+.cart-details .membership-quantity input {
+  padding: 5px 10px;
+  align-items: center !important;
+  text-align: center !important;
+  border: 1px solid #ccc;
+  background-color: #fff; 
+  cursor: not-allowed;
+}
+
+.cart-details .membership-quantity input:focus {
+  outline: none;
+}
+
+.cart-details a {
+  color: black;
+  text-decoration: none;
+}
+
+.cart-details a:hover {
+  text-decoration: underline;
+}
+  
+.cart-details .remove-membership {
+  background-color: #fff transparent;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.cart-details .remove-membership:hover {
+  background-color: #fff transparent;
+}
+
+.cart-details .remove-membership:focus {
+  outline: none;
+}
+
+.cart-details .saved {
+  color: red;
+  text-align: right;
+  font-weight: normal;
+}
+
+.cart-details .button-checkout {
+  display: inline-block;
+  font-weight: bold;
+  width: 100%;
+  color: #fff;
+  vertical-align: middle;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: black;
+  border: 1px solid black;
+  padding: .5rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.cart-details .button-checkout:focus,
+.cart-details .button-checkout:active,
+.cart-details .button-checkout:hover,
+.cart-details .button-checkout:visited {
+  outline: none;
+}
+
+.cart-details .button-checkout:hover {
+  background-color: #ccc;
+  border-color: #ccc;
+}
+
+.cart-details .button-checkout:focus, .button-checkout:active {
+  background-color: #ddd;
+  border-color: #ddd;
+}
+
+.member-benefits {
+  padding: 10px;
+  display: flex-block;
+}
+
+.accepted-payment-methods {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.payment-method {
+  width: 40px;
+  height: 24px;
+  margin-right: 2px;
+  margin-left: 8px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+h3 {
+  color:black;
+  text-align: left;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 800;
+}
+
+.total-price {
+  color:black;
+  text-align: right;
+  font-weight: 800;
+}
+
+p {
+  color: black;
+  text-align: center;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+form {
+  margin-top: 0.5rem;
+}

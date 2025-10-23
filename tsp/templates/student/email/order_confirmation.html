@@ -1,0 +1,82 @@
+<!-- This template is used to generate an HTML email confirmation for an order. -->
+{% load custom_tags %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/student/tickets_style.css' %}"/>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>We have received your order #{{ order.id }}</title>
+  </head>
+  <body>
+    <h2>Confirmation for Order #{{ order.id }}</h2>
+    <p>Dear {{ order.student.full_name }},</p>
+    <p>Thank you for your order! Here are the details:</p>
+    <ul>
+      <table>
+        <tr><p class="card-text">Date: {{ order.create_at }}</p></tr>
+        <tr><p class="card-text">Amount: GBP£{{ cart.total_price }}</p></tr>
+      </table>
+      {% if cart.total_price > 0 %}
+        <table>
+          <tr><p class="card-text">Payment total: GBP£{{ cart.total_price }}</p></tr>
+          <tr><p class="card-text">
+            Payment Card: 
+            {{ payment.brand }}**** **** **** {{ payment.last4|slice:'-4:' }}
+          </p></tr>
+        </table>
+      {% endif %}
+      <h3>Items: </h3>
+      {% for ticket in tickets %}
+        <div class="row mb-4">
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <p class="card-text">Ticket number # {{ ticket.id }}</p>
+                <p style="text-weight: bold;">{{ ticket.event.name }}</p>
+                <p class="card-text">
+                  {% if ticket.type == 'early_bird' %}
+                    Early Bird Ticket
+                  {% else %}
+                    Standard Ticket
+                  {% endif %}
+                </p>
+                <p class="card-text">
+                  Event time:
+                  {% if ticket.event.start_time|date:"Y" == ticket.event.end_time|date:"Y" %}
+                    {{ ticket.event.start_time|date:"jS F" }}
+                    {% if ticket.event.start_time|date:"j" != ticket.event.end_time|date:"j" %}
+                    - {{ ticket.event.end_time|date:"jS F Y" }}
+                    {% endif %}
+                  {% else %}
+                    {{ event.start_time|date:"jS F" }} - {{ event.end_time|date:"jS F" }}
+                  {% endif %}
+                </p>
+                <p class="card-text">
+                  Location: {{ ticket.event.location }}
+                </p>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      {% for society in cart.membership.all %}
+        <div class="row mb-4">
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <p class="card-text"> {{ society.university.name }} </p>
+                <p style="text-weight: bold;">{{ society.name }} Membership</p>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </ul>
+    <p>Thank you for your purchase!</p>
+    <p>Best Regards,</p>
+    <p>The TSP Team</p>
+  </body>
+</html>

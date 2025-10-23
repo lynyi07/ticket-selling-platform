@@ -1,0 +1,16 @@
+{% extends 'partials/navbar/navbar_base.html' %}
+{% load static %}
+{% block body %}
+<div class="navbar-nav mr-auto mb-2 mb-lg-0">
+  <a class="navbar-brand navigation" href="{% url 'landing' %}">
+    <img src="{% static '/images/tixstar_logo.jpg' %}" width="30" height="30" class="d-inline-block align-top" alt="An image of the logo">
+    Tixstar
+  </a>
+  <li class="nav-item">
+    <a class="nav-link navigation" href="{% url 'view_societies' %}">Societies</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link navigation" href="{% url 'create_society' %}">Create society</a>
+  </li>
+</div>
+{% endblock %}

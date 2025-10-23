@@ -1,0 +1,27 @@
+[
+  {
+    "model": "tsp.eventcartitem",
+    "pk": 25,
+    "fields": {
+      "event": 15,
+      "early_bird_quantity": 2,
+      "standard_quantity": 0
+    }
+  },
+  {
+    "model": "tsp.basecart",
+    "pk": 26,
+    "fields": {
+      "event_cart_item": [25],
+      "membership": [5]
+    }
+  },
+  {
+    "model": "tsp.cart",
+    "pk": 28,
+    "fields": {
+      "basecart_ptr": 26,
+      "student": 1
+    }
+  }
+]

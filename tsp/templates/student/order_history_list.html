@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/table_style.css' %}"/>
+<h1 >Order History</h1>
+<div class="container">
+  <table class="view-table" id="table">
+    <tr>
+      <th>Order</th>
+      <th>Created</th>
+      <th>Address</th>
+      <th></th>
+      <th>Post Code</th>
+      <th>Country</th>
+    </tr>
+    {% if object_list %}
+      {% for order in object_list %}
+        <tr>
+          <td>{{ order.pk }}</td>
+          <td>{{ order.create_at }}</td>
+          <td>{{ order.line_1 }}</td>
+          <td>
+            {% if order.line_2 %}
+              {{ order.line_2 }}
+            {% endif %}
+          </td>
+          <td>{{ order.postcode }}</td>
+          <td>{{ order.country }}</td>
+          <td><a href="{% url 'order_detail' order.pk %}" class="btn btn-primary">Order Details</a></td> 
+        </tr>
+      {% endfor %} 
+    {% else %}
+      <tr>
+        <td colspan="7">No order history</td>
+      </tr>
+    {% endif %}
+  </table>
+</div>
+{% endblock %}

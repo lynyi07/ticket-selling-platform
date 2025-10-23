@@ -1,0 +1,20 @@
+[
+  {
+    "model": "tsp.event",
+    "pk": 15,
+    "fields": {
+        "name": "Default test event",
+        "description": "This is a default test event",
+        "location": "Default test location",
+        "photo": "default_event_photo.jpg",
+        "start_time": "2030-02-06T12:00:00Z",
+        "end_time": "2030-02-07T12:00:00Z",
+        "early_booking_capacity": 50,
+        "standard_booking_capacity": 100,
+        "early_bird_price": 3.0,
+        "standard_price": 5.0,
+        "society": [5],
+        "host": 5
+    }
+  }
+]

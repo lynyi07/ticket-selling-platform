@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/student/checkout_style.css' %}"/>
+<div class="cart-container">
+  {% include 'partials/messages.html' %}
+  <form action="{% url 'checkout' %}" method="post" id="payment-form">
+    {% csrf_token %}
+    {% for field in form %}
+      {% if field.name != 'payment_method_id' and field.name != 'amount' %}
+        <div class="form-group {% if field.errors %}has-error{% endif %}">
+          <label for="{{ field.auto_id }}">{{ field.label }}:</label>
+          {{ field }}
+          {% if field.errors %}
+            <p class="help-block">{{ field.errors.as_text }}</p>
+          {% endif %}
+          {% if field.name == 'email' %}
+            <small class="form-text text-muted">
+              Enter your email address to receive order confirmation and tickets.
+            </small>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+    <div class="form-group">
+      <label for="stripeToken">Card details:</label>
+      <div id="card-element"></div>
+      <div id="card-errors"></div>
+    </div>
+    <input type="hidden" name="payment_method_id" value="{{payment_method_id}}">
+    <input type="hidden" name="amount" value="{{ cart.total_price }}">
+    <button type="submit" class="btn btn-primary" id="submit-button">Pay now</button>
+  </form>
+</div>
+
+<!-- Set the stripe api key for checking out -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  window.STRIPE_PUBLIC_KEY = '{{ STRIPE_PUBLIC_KEY }}';
+</script>
+
+<!-- Load the checkout JavaScript file -->
+<script src="{% static 'js/checkout.js' %}"></script>
+{% endblock %}

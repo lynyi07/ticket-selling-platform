@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form_style.css' %}"/>
+<div class="container">
+  <div class="col-12 card" id="card">
+    <h1 class="text-center my-4">Enter Email Below</h1>
+    {% include 'partials/messages.html' %}
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group {% if field.errors %}has-error{% endif %}">
+          {{ field.label_tag }}
+          {{ field|add_class:"form-control" }}
+          {% if field.errors %}
+            <p class="help-block">{{ field.errors.as_text }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <div class="d-flex justify-content-center">
+        <a href="{% url 'list_committee_member' %}" class="btn btn-primary">View Members</a>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

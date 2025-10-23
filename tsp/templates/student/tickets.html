@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+{% load mathfilters %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/student/tickets_style.css' %}"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+<div class="card-container">
+  <h3>Tickets for Order {{ order.id }}</h3>
+  {% for ticket in tickets %}
+    <div class="row mb-4">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <p class="card-text">Ticket number # {{ ticket.id }}</p>
+            <h5 class="card-title">{{ ticket.event.name }}</h5>
+            <p class="card-text">
+              {% if ticket.type == 'early_bird' %}
+                Early Bird Ticket
+              {% else %}
+                Standard Ticket
+              {% endif %}
+            </p>
+            <p class="card-text">
+              <i class="fas fa-clock"></i>
+              {% if ticket.event.start_time|date:"Y" == ticket.event.end_time|date:"Y" %}
+                {{ ticket.event.start_time|date:"jS F" }}
+                {% if ticket.event.start_time|date:"j" != ticket.event.end_time|date:"j" %}
+                  - {{ ticket.event.end_time|date:"jS F Y" }}
+                {% endif %}
+              {% else %}
+                {{ event.start_time|date:"jS F" }} - {{ event.end_time|date:"jS F" }}
+              {% endif %}
+            </p>
+            <p class="card-text">
+              <i class="fas fa-map-marker-alt"></i> {{ ticket.event.location }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <p>No events found for this order.</p>
+  {% endfor %}
+</div>
+{% endblock %}

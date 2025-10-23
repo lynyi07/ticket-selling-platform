@@ -1,0 +1,38 @@
+{% load static %}
+<nav class="base">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    {% block body %}
+    {% endblock %}
+    <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle bi-person-circle account-dropdown" href="#" id="user-account-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          My account
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" id="account-dropdown-menu-end" aria-labelledby="user-account-dropdown">
+          <li><a class="dropdown-item">Email: {{ request.user.email }}</a></li>
+          {% if request.user.role == 'STUDENT' %}
+            <li><a class="dropdown-item">Account: Student </a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'list_order_history' %}">Orders</a></li>
+          {% endif %}
+          {% if request.user.role == 'SOCIETY' %}
+            <li><a class="dropdown-item">Account: Society</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'bank_details' %}">Bank Details</a></li>
+          {% endif %}
+          {% if request.user.role == 'STUDENT_UNION' %}
+            <li><a class="dropdown-item">Account: Student Union</a></li>
+          {% endif %}
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="{% url 'log_out' %}">Log out</a></li>
+          <li><a class="dropdown-item" href="{% url 'change_password' %}">Change password</a></li>
+        </ul>
+      </li>
+    </div>
+  </div>
+</nav>  
+</nav>

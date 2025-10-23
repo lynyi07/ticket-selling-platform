@@ -1,0 +1,118 @@
+.slider{
+  position: hidden;
+  height: 1000px;
+  overflow: hidden;
+  margin-top: -1.15%;
+}  
+
+.slider figure{
+  position: relative; 
+  width: 500%; 
+  margin: 0; 
+  left: 0; 
+  animation: 20s slider infinite; 
+} 
+
+.slider figure img{
+  position: relative;
+  float: left; 
+  width: 20%;
+}  
+
+.container{
+  text-align: center;
+}
+
+.infront{
+  display: block;
+  position: absolute; 
+  width: 100%;  
+  padding-top: 30%;
+}  
+
+.infront h1{
+  position: relative; 
+  color: white; 
+  text-align: center;
+}
+
+.topMiddle{
+  position: relative;  
+  padding-top: 20px;
+} 
+
+.topMiddle h1{
+  font-weight: 400;
+  padding-left: 30px; 
+} 
+
+.split{
+  position: relative;
+  columns: 3;
+  padding-top: 100px;
+}
+
+.lowerMiddle{
+  position: relative;
+  background-color: rgb(79, 76, 76); 
+  width: auto; 
+  height: 200px;
+  border-radius: 25px;  
+}  
+
+.container{
+  position: relative;  
+}
+
+.lowerMiddle h1{
+  font-weight: 500;
+  padding-left: 10px;
+  color: white;
+} 
+
+.lowerMiddle p{
+  padding-left: 10px; 
+  color: white;
+} 
+
+.firstHeader h1{
+  font-size: 150px; 
+  padding-bottom: 20px; 
+} 
+
+.eventsLink label{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  position: relative; 
+  color: white;
+  text-align: center;
+  font-size: x-large;
+  border-radius: 50px;  
+  background-color: red;
+  width: 200px;
+  height: 50px;
+  text-decoration: none;
+}
+
+@keyframes slider{
+  0%{
+    left: 0;
+  } 
+  20%{
+    left: 0;
+  } 
+  25%{
+    left: -100%;
+  } 
+  45%{
+    left: -100%;
+  } 
+  50%{
+    left: -200%;
+  } 
+  70%{
+    left: -200%;
+  }
+}

@@ -1,0 +1,19 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/student/add_to_cart_style.css' %}"/>
+<div class="event-details right">
+  {% include 'partials/messages.html' %}
+  <form method="POST" action="{% url 'add_to_cart' %}">
+    {% csrf_token %}
+    <input type="hidden" name="event_pk" value="{{ event.pk }}">
+    {% for field in form %}
+      <div class="form-group {% if field.errors %}has-error{% endif %}">
+        <label>{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+          <p class="help-block">{{ field.errors.as_text }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Add to cart</button>
+  </form>
+</div>

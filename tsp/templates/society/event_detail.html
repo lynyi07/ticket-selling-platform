@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/society/event_detail_style.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/society/modal_style.css' %}"/>
+<div class="event-details">
+  {% include 'partials/messages.html' %}
+  <div class="col-12 card" id="card">
+    <div class="actions">
+      <a href="{% url 'events_list' %}" class="btn btn-primary">
+        <i class="fas fa-arrow-left"></i> Go Back
+      </a>
+      <a href="{%url 'event_tickets' event.id %}" class="btn btn-primary">
+        <i class="fas fa-ticket-alt"></i> View Tickets
+      </a>
+      {% if event.is_active %}
+        <a href="{% url 'modify_event' event.id %}" class="btn btn-primary">
+          <i class="fas fa-edit"></i> Modify Event
+        </a>
+        <a onclick="document.getElementById('cancel_modal').style.display='block'" class="btn btn-primary" style="color:#fff">
+          <i class="fas fa-times"></i> Cancel Event
+        </a>
+        <div id="cancel_modal" class="modal">
+          <form class="modal-content" method="post" action="{% url 'cancel_event' %}">
+            {% csrf_token %}
+            <input type="hidden" name="event_id" value="{{ event.id }}">
+            <div class="container">
+              <h2>Cancel Event</h2>
+              <label>Are you sure you want to cancel your event? If you proceed, the ticket holders will get the notification emails.</label>
+              <div class="clearfix">
+                <button type="button" 
+                  onclick="document.getElementById('cancel_modal').style.display='none'" 
+                  class="cancelbtn">
+                  Go back
+                </button>
+                <button type="submit" 
+                  onclick="document.getElementById('cancel_modal').style.display='none'" 
+                  class="deletebtn">
+                  Proceed
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>        
+      {% endif %}
+    </div>
+    <div class="event-photo">
+      {% if event.photo %}
+        <img src="{{ event.photo.url }}" alt = "Event photo">
+      {% endif %}
+    </div>
+    <div class="event">
+      <h1>{{ event.name }}</h1>
+      <p><span>Description: </span> {{ event.description }}</p>
+      <p><span>Start Time: </span>{{ event.start_time }} </p>
+      <p><span>End Time: </span>{{ event.end_time }}</p> 
+      <p><span>Early Booking Capacity: </span>{{ event.early_booking_capacity }} </span></p>
+      <p><span>Regular Booking Capacity: </span>{{ event.standard_booking_capacity }}</p>
+      <p><span>Location: </span>{{ event.location }}</p>
+      <p><span>Early Bird Price: </span>GBP£{{ event.early_bird_price }}</p>
+      <p><span>Standard Price: </span>GBP£{{ event.standard_price }}</p>
+      <h6>Organised by:</h6>
+      {% for society in event.society.all %}
+        <p>{{ society.name }} society, {{ society.university.name }}</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<script>
+  var modal = document.getElementById('cancel_modal');
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>   
+{% endblock %}

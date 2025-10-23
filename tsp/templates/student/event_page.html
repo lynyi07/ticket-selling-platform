@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/student/event_page_style.css' %}"/>
+<div class="event-details">
+  <div class="event-details left">
+    <div class="button-container">
+      <a href="{% url 'all_events' %}" class="btn btn-primary">
+        <i class="fas fa-arrow-left"></i> Go Back
+      </a> 
+      <form method="post" action="{% url 'save_event' %}">
+        {% csrf_token %}
+        <input type="hidden" name="event_pk" value="{{ event.pk }}">
+        {% if event in student.saved_event.all %}
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-bookmark"></i>
+            Unsave
+          </button>
+        {% else %}
+          <button type="submit" class="btn btn-primary">
+            <i class="far fa-bookmark"></i>
+            Save
+          </button>
+        {% endif %} 
+      </form>
+    </div>
+    <div class="col-12 card" id="card">
+      <div class="event-photo">
+        {% if event.photo %}
+          <img src="{{ event.photo.url }}" alt = "Event photo">
+        {% endif %}
+      </div>
+      <h1 >{{ event.name }}</h1>
+      {% if event.description %}
+        <p><span>Description: </span> {{ event.description }}</p>
+      {% endif %}
+      <p><span>Start Time: </span>{{ event.start_time }} </p>
+      <p><span>End Time: </span>{{ event.end_time }}</p> 
+      <p><span>Location: </span>{{ event.location }}</p>
+      {% if event.early_booking_capacity %}
+        <p><span>Early Bird Price: </span>GBP£{{ event.early_bird_price }}</p>
+      {% endif %}
+      <p><span>Standard Price: </span>GBP£{{ event.standard_price }}</p>
+      <h6>Organised by:</h6>
+      {% for society in event.society.all %}
+        <p>{{ society.name }} society, {{ society.university.name }}</p>
+      {% endfor %}
+    </div>
+  </div>
+  {% if event.is_active %}
+    {% include 'student/add_to_cart.html' with form=form %}
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+button {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: white;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+button:hover {
+  opacity: 1;
+}
+
+.cancelbtn, .deletebtn {
+  width: 40%;
+  border-radius: 4px;
+}
+
+.cancelbtn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.deletebtn {
+  background-color: #dc3545;
+}
+
+.container {
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 12% auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 30%;
+  border-radius: 4px;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin: auto;
+}
+
+h2 {
+  color: #0a0a0a;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}

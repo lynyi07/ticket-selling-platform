@@ -1,0 +1,14 @@
+{% autoescape off %}
+Dear {{ user_name }}, 
+
+One more step until you become our member! 
+
+Please click on the link below to confirm your registration:
+
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+Stay Tuned,
+
+TSP
+#1 ticket selling platform. since 2023
+{% endautoescape %}

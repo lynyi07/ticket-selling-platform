@@ -1,0 +1,71 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e9e9e9;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.custom-search-button {
+  background-color: black !important;
+  border-color: black !important;
+  margin-bottom: 2%;
+  margin-top: auto;
+  border-radius: 5px;
+}
+
+.custom-search-button:hover,
+.custom-search-button:focus,
+.custom-search-button:active {
+  background-color: black !important;
+  border-color: black !important;
+}
+
+.societies-container {
+  background-color: #e9e9e9;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.societies {
+  width: 30%;
+  height: 100px;
+  margin: 0 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  background-color: #fff;
+  text-align: center;
+  padding: 20px;
+  border: 50px #d3d3d3;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.societies a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.filter_societies {
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  margin: 20px 0;
+  padding: 10px;
+  background-color: #e9e9e9;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.select_societies {
+  padding: 10px;
+}
+

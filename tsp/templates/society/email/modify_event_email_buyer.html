@@ -1,0 +1,23 @@
+{% autoescape off %}
+Dear {{ user.full_name }},
+
+We're writing to let you know that an event you've purchased tickets for has recently been updated.
+
+Below are the details of the event prior to the update:
+
+Name: {{ event.name }}
+Description: {{ event.description }}
+Start time: {{ event.start_time }}
+End time: {{ event.end_time }}
+Location: {{ event.location }}
+
+To see the updated event details,  please visit this page: 
+http://{{ domain }}{% url 'event_detail' event.id %}
+
+Thank you for your interest in our platform's events. If you have any questions or concerns, please don't hesitate to contact us.
+
+Best regards,
+
+TSP
+#1 ticket selling platform. since 2023
+{% endautoescape %}

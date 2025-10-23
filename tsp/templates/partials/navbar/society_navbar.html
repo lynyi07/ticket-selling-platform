@@ -1,0 +1,26 @@
+{% extends 'partials/navbar/navbar_base.html' %}
+{% load static %}
+{% block body %}
+<div class="navbar-nav mr-auto mb-2 mb-lg-0">
+  <a class="navbar-brand navigation" href="{% url 'edit_profile_page' %}">
+    <img src="{% static '/images/tixstar_logo.jpg' %}" width="30" height="30" class="d-inline-block align-top" alt="An image of the logo">
+    Tixstar
+  </a>
+  <li class="nav-item">
+    <a class="nav-link navigation" href="{% url 'events_list' %}">Events</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link navigation" href="{% url 'create_event' %}">Create event</a>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle account-dropdown" href="#" id="user-account-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Members
+    </a>
+    <div class="dropdown-menu" id="members-dropdown-menu-end" aria-labelledby="navbarDropdown">
+      <a class="dropdown-item" href="{% url 'list_regular_member' %}">Members</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="{% url 'list_committee_member' %}">Committee Members</a>
+    </div>
+  </li>
+</div>
+{% endblock %}

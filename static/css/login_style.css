@@ -1,0 +1,107 @@
+body{
+  background-color: white;
+  text-align: center;
+}
+
+label {
+  display: block;
+  color: black; 
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  letter-spacing: 0.5px; 
+  font-weight: bold;
+  padding-bottom: 10px;
+}  
+
+a {
+  color: black; 
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+p {
+  position: relative; 
+  height: 100px;
+}  
+
+input[type="text"] {
+  display: block;
+  width: 200px;
+  height: 40px;
+  margin-left: auto;
+  margin-right: auto;
+} 
+
+input[type="password"] {
+  display: block;
+  width: 200px;
+  height: 40px;
+  margin-left: auto;
+  margin-right: auto;
+} 
+
+input[type="submit"] { 
+  border-radius: 25px;
+  position: relative; 
+  font-size: 30px;
+  text-align: center; 
+  height: 50px;
+  width: 200px;  
+  background-color: white;
+  transition: 00.25s;
+}  
+
+input[type="submit"]:hover {
+  height: 55px;
+  width: 220px;
+  transition: 0.25s;
+}  
+
+hr {
+  width: 500px;
+} 
+
+button{
+  border-radius: 25px;
+  position: relative;
+  font-size: 30px;
+  text-align: center; 
+  height: 50px;
+  width: 200px;  
+  background-color: white;
+  transition: 00.25s;
+} 
+
+button:hover {
+  height: 55px;
+  width: 220px;
+  transition: 0.25s;
+}
+
+select {
+  width: 200px;
+  height: 30px;
+  font-size: 15px;
+}
+
+ul {
+  list-style: none;
+}
+
+.spacingOne {
+  position: relative; 
+  height: 40px;
+}
+
+.spacingTwo {
+  position: relative; 
+  height: 50px;
+} 
+
+.spacingThree {
+  position: relative; 
+  height: 30px;
+}
+
+.spacingFour {
+  position: relative; 
+  height: 20px;
+}

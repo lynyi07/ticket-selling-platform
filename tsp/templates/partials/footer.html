@@ -1,0 +1,20 @@
+{% load static %}
+<div class="footer">
+  <img src="{% static '/images/tixstar_logo.jpg' %}" width="60" height="60"> 
+  <div class="left_side">
+    <label>Important Links</label> 
+    <div class="socials"> 
+      <a href="#" class="bi-instagram"></a> 
+      <a href="#" class="bi-spotify"></a> 
+      <a href="#" class="bi-twitter"></a>
+    </div>
+  </div>
+  {% if not user.is_authenticated %}
+    <div class="info">
+      <a href="{% url 'login' %}">Login</a>
+    </div> 
+    <div class="info">
+      <a href="{% url 'sign_up' %}">Sign Up</a>  
+    </div>
+  {% endif %}
+</div> 

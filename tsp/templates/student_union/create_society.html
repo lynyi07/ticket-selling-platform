@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form_style.css' %}"/>
+<div class="container">
+  <div class="col-12 card" id="card">
+    <h1 class="text-center my-4">Create A Society Account</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group {% if field.errors %}has-error{% endif %}">
+          {{ field.label_tag }}<span class="text-danger">{% if field.field.required %}*{% endif %}</span>
+          {% if form.is_bound %}
+            {% if field.errors %}
+              {% render_field field class="form-control is-invalid" %}
+            {% else %}
+              {% render_field field class="form-control is-valid" %}
+            {% endif %}
+          {% else %}
+            {% render_field field class="form-control" %}
+          {% endif %}          
+          {% if field.errors %}
+            <p class="help-block">{{ field.errors.as_text }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+      {% include 'partials/messages.html' %}
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

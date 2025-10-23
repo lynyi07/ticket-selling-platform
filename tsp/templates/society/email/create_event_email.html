@@ -1,0 +1,27 @@
+{% autoescape off %}
+Dear {{ user.full_name }},
+
+A new event is now available!
+
+Here are some details about the event:
+
+--------------------------------------------------
+Name: {{ event.name }}
+
+Description:
+{{ event.description }}
+
+Start time: {{ event.start_time }}
+End time: {{ event.end_time }}
+Location: {{ event.location }}
+
+Want to but a ticket?:
+http://{{ domain }}{% url 'event_page' event.id %}
+--------------------------------------------------
+Thank you!
+
+Best Regards,
+
+TSP
+#1 ticket selling platform. since 2023
+{% endautoescape %}

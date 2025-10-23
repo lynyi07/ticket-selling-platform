@@ -1,0 +1,46 @@
+{% load static %}
+<html>
+  <head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login_style.css' %}">
+  </head>
+  <body>
+    <img src="{% static '/images/tixstar_logo.jpg' %}" width="60" height="60">
+    <hr>
+    <div class="spacingOne"></div>
+    <div>
+      <label>To continue, log in to TSP</label>
+    </div>
+    <div class="spacingOne"></div>
+    <form action="{% url 'login' %}" method="post">
+      <label for="account_type">Select account type:</label>
+      <select name="account" id="account_type">
+        <option value="STUDENT">
+          Student
+        </option>
+        <option value="SOCIETY">
+          Society
+        </option>
+        <option value="STUDENT_UNION">
+          Student Union
+        </option>
+      </select>
+      <div class="spacingOne"></div>
+      {% csrf_token %}
+      {{form.as_p}}
+      {% include 'partials/messages.html' %}<br>
+      <a href="forgot_password">Forgot your password?</a>
+      <div class="spacingOne"></div>
+      <div><input type="submit", value="LOGIN"></div>
+    </form>
+    <hr>
+    <div class="spacingThree"></div>
+    <div>
+      <label>Don't have an account?</label>
+      <div class="spacingFour"></div>
+      <form action="{% url 'sign_up' %}">
+        <div><input type="submit", value="SIGN UP"></div>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/table_style.css' %}"/>
+<h1>Committee Members</h1>
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <a href="{% url 'add_committee_member' %}" class="btn btn-primary">
+      <i class="fas fa-plus"></i> Add Committee Member
+    </a>
+    <a href="{% url 'contact_committee' %}" class="btn btn-primary">
+      <i class="fas fa-envelope"></i> Contact All
+    </a>
+  </div>
+  <table class="view-table" id="table">
+    <tr>
+      <th>Email</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+    </tr>
+    <!-- Iterate through members and insert into table rows -->
+    {% if object_list %}
+      {% for member in object_list %}
+        <tr>
+          <td>{{ member.email }}</td>
+          <td>{{ member.first_name }}</td>
+          <td>{{ member.last_name }}</td>
+          <td>
+            <form method="post" action="{% url 'remove_committee_member' %}">
+                {% csrf_token %}
+                <input type="hidden" name="member_pk" value="{{ member.pk }}">
+                <button type="submit" class="btn btn-primary">Remove</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <tr>
+        <td colspan="7">No Committee Members Found</td>
+      </tr>
+    {% endif %}
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+[
+  {
+    "model": "tsp.order",
+    "pk": 29,
+    "fields": {
+      "student": 1,
+      "customer_id": "fakecus_customer_id",
+      "line_1": "Strand",
+      "line_2": "King's College London",
+      "city_town": "London",
+      "postcode": "WC2R 2LS",
+      "country": "United Kingdom"
+    }
+  }     
+]

@@ -1,0 +1,123 @@
+[
+  {
+    "model": "tsp.user",
+    "pk": 7,
+    "fields": {
+      "university_id": 13,
+      "email": "janedoe@kcl.ac.uk",
+      "password": "pbkdf2_sha256$260000$4BNvFuAWoTT1XVU8D6hCay$KqDCG+bHl8TwYcvA60SGhOMluAheVOnF1PMz0wClilc="
+    }
+  },
+  {
+    "model": "tsp.student",
+    "pk": 8,
+    "fields": {
+      "user_ptr": 7,
+      "first_name": "jane",
+      "last_name": "doe"
+    }
+  },
+  {
+    "model": "tsp.user",
+    "pk": 9,
+    "fields": {
+      "university_id": 13,
+      "email": "ai_society@kcl.ac.uk",
+      "password": "pbkdf2_sha256$260000$4BNvFuAWoTT1XVU8D6hCay$KqDCG+bHl8TwYcvA60SGhOMluAheVOnF1PMz0wClilc=",
+      "role": "SOCIETY"
+    }
+  },
+  {
+    "model": "tsp.society",
+    "pk": 10,
+    "fields": {
+      "user_ptr": 9,
+      "name": "KCL AI society",
+      "student_union": 3,
+      "member_discount": 10,
+      "member_fee": 5,
+      "account_name": "KCL AI society",
+      "account_number": "00012345",
+      "sort_code": "108800",
+      "stripe_account_id": "acct_1MfrHlKvlxSITsBd"
+    }
+  },
+  {
+    "model": "tsp.user",
+    "pk": 11,
+    "fields": {
+      "university_id": 13,
+      "email": "uclsu@ucl.ac.uk",
+      "password": "pbkdf2_sha256$260000$4BNvFuAWoTT1XVU8D6hCay$KqDCG+bHl8TwYcvA60SGhOMluAheVOnF1PMz0wClilc=",
+      "role": "STUDENT_UNION"
+    }
+  },
+  {
+    "model": "tsp.studentunion",
+    "pk": 12,
+    "fields": {
+      "user_ptr": 11,
+      "name": "UCLSU"
+    }
+  },
+  {
+    "model": "tsp.user",
+    "pk": 13,
+    "fields": {
+      "university_id": 17,
+      "email": "evasmith@qmw.ac.uk",
+      "password": "pbkdf2_sha256$260000$4BNvFuAWoTT1XVU8D6hCay$KqDCG+bHl8TwYcvA60SGhOMluAheVOnF1PMz0wClilc="
+    }
+  },
+  {
+    "model": "tsp.student",
+    "pk": 14,
+    "fields": {
+      "user_ptr": 13,
+      "first_name": "eva",
+      "last_name": "smith"
+    }
+  },
+  {
+    "model": "tsp.user",
+    "pk": 20,
+    "fields": {
+      "university_id": 17,
+      "email": "qmusu@qmw.ac.uk",
+      "password": "pbkdf2_sha256$260000$4BNvFuAWoTT1XVU8D6hCay$KqDCG+bHl8TwYcvA60SGhOMluAheVOnF1PMz0wClilc=",
+      "role": "STUDENT_UNION"
+    }
+  },
+  {
+    "model": "tsp.studentunion",
+    "pk": 21,
+    "fields": {
+      "user_ptr": 20,
+      "name": "QMUSU"
+    }
+  },
+  {
+    "model": "tsp.user",
+    "pk": 22,
+    "fields": {
+      "university_id": 17,
+      "email": "robotics@qmw.ac.uk",
+      "password": "pbkdf2_sha256$260000$4BNvFuAWoTT1XVU8D6hCay$KqDCG+bHl8TwYcvA60SGhOMluAheVOnF1PMz0wClilc=",
+      "role": "SOCIETY"
+    }
+  },
+  {
+    "model": "tsp.society",
+    "pk": 23,
+    "fields": {
+      "user_ptr": 22,
+      "name": "QMU Robotics society",
+      "student_union": 3,
+      "member_discount": 10,
+      "member_fee": 5,
+      "account_number": "00012345",
+      "sort_code": "108800",
+      "stripe_account_id": "acct_1MfrHlKvlxSITsBd"
+    }
+  }
+]

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/table_style.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/society/modal_style.css' %}"/>
+<h1>Society Members</h1>
+<div class="container">
+  {% if messages %}
+    <div class="alert alert-dismissible">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+  <div class="d-flex justify-content-center">
+    <a href="{% url 'member_fee' %}" class="btn btn-primary mr-2">
+      <i class="fas fa-coins"></i> Manage Member Fee
+    </a>
+    <a href="{% url 'member_discount' %}" class="btn btn-primary">
+      <i class="fas fa-percent"></i> Manage Member Discount
+    </a>
+    <a onclick="document.getElementById('cancel_modal').style.display='block'" class="btn btn-primary" style="color:#fff">
+      <i class="fas fa-user-minus"></i> Remove All Members
+    </a>
+    <div id="cancel_modal" class="modal">
+      <form class="modal-content" method="post" action="{% url 'clear_regular_members' %}">
+        {% csrf_token %} 
+        <div class="container">
+          <h2>Clear Members</h2>
+          <label>Are you sure you want to remove all members?</label>
+          <div class="clearfix">
+            <button type="button" 
+              onclick="document.getElementById('cancel_modal').style.display='none'" 
+              class="cancelbtn">
+              Go back
+            </button>
+            <button type="submit" 
+              onclick="document.getElementById('cancel_modal').style.display='none'" 
+              class="deletebtn">
+              Proceed
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <table class="view-table" id="table">
+    <tr>
+      <th>Email</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+    </tr>
+    <!-- Iterate through members and insert into table rows -->
+    {% if object_list %}
+      {% for member in object_list %}
+        <tr>
+          <td>{{ member.email }}</td>
+          <td>{{ member.first_name }}</td>
+          <td>{{ member.last_name }}</td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <tr>
+        <td colspan="7">No Members Found</td>
+      </tr>
+    {% endif %}
+  </table>
+</div>
+<script>
+  var modal = document.getElementById('cancel_modal');
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+{% endblock %}
