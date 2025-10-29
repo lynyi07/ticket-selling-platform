@@ -1,130 +1,133 @@
-# Team Gryffindor Large Group project
+# Ticket Selling Platform
 
-## Team members
-The members of the team are:
-  * Lyn Yi Cheng
-  * Simran Debnath
-  * Daniel Holland
-  * Brian Jalleh
-  * Susetta James
-  * Seohyun (Jen) Kwon
-  * Jasdeep Panum
-  * Erikas (Erik) Staugas
-  * Yue (Michelle) Wang
-
-  
-## Project structure
+A full-stack web application that enables university students to discover, manage and purchase society event tickets online. Supports different user roles including students, societies and university student union administrators.
 
 
+## Overview
 
-## Deployed version of the application
-The deployed version of the application can be found at https://bjalleh02.pythonanywhere.com/
+This platform is built to streamline university society engagement by providing a unified digital space for event discovery and ticketing. Students can browse events, follow societies, save favourites and manage purchases. Societies can publish and manage events including ticketing and membership details. The student union can verify and onboard official societies to ensure authenticity and secure participation.
+
+This project demonstrates full stack development including authentication flows, database modelling, role-based access control and third-party payment integration.
 
 
-## Installation instructions
-To install the software and use it in your local development environment, you must first set up and activate a local development environment.  From the root of the project:
+## Platform Features
 
+The platform supports three different user roles with distinct access privileges and functionality: Student, Society, and Student Union Administrator.
+
+### Student Features
+
+Students are the primary users purchasing tickets and interacting with societies.
+
+They can:
+- Create a verified student account using a university email domain
+- Browse personalised and recommended events
+- Follow societies and view related activity on a For You page
+- View detailed event pages and add tickets or memberships to cart
+- Manage cart items before checkout
+- Complete secure checkout with test payment functionality
+- Receive confirmation emails for orders
+- View order history, order details, and purchased tickets
+- Perform password updates and account recovery
+
+Restrictions:
+- Cannot access society or administrator functionality
+
+### Society Features
+
+Societies are event organisers and membership providers.
+
+They can:
+- View and manage society profiles and bank details
+- Create new events with partner societies
+- Notify subscribers when new events are created
+- Manage event status: upcoming, past and cancelled events
+- Modify details of upcoming events including capacity and booking settings
+- View ticket holders and membership lists
+- Manage membership fees and discounts
+
+Restrictions:
+- Cannot access student union functions
+
+### Student Union Administrator Features
+
+Admins provide organisational governance.
+
+They can:
+- Approve and create societies in the database
+- Review and manage society details
+- Perform password recovery and secure logout
+
+Restrictions:
+- No access to event creation or student-specific features
+
+
+## Tech Stack
+
+- Python (Django)
+- HTML, CSS, JavaScript
+- SQLite or PostgreSQL database
+- Stripe payment API (test mode)
+- Automated testing with coverage.py
+
+
+## How To Run Locally
+1. Clone the repository:
+```bash
+git clone https://github.com/<your-username>/ticket-selling-platform
+cd ticket-selling-platform
 ```
-$ virtualenv venv
-$ source venv/bin/activate
+
+2. Create and activate a virtual environment:
+```bash
+virtualenv venv
+source venv/bin/activate
 ```
 
-Install all required packages:
-
-```
-$ pip3 install -r requirements.txt
-```
-
-Migrate the database:
-
-```
-$ python3 manage.py migrate
+3. Install all required packages:
+```bash
+pip3 install -r requirements.txt
 ```
 
-Seed the development database with:
-
-```
-$ python3 manage.py seed
-```
-
-Run all tests with:
-```
-$ python3 manage.py test
+4. Apply all database migrations:
+```bash
+python3 manage.py migrate
 ```
 
-*The above instructions should work in your version of the application.  If there are deviations, declare those here in bold.  Otherwise, remove this line.*
+5. Seed the development database with initial data:
+```bash
+python3.manage.py seed
+```
+
+6. (Optional) Run automated tests to verify the system:
+```bash
+python3 manage.py test
+```
+
+7. Start the local development server:
+```bash
+python3 manage.py runserver
+```
+
+8. Once the server is running, the application will be accessible at:
+```
+http://127.0.0.1:8000/
+```
+
+## Demo
+
+Watch a walk-through demo on YouTube: 
+https://www.youtube.com/watch?v=f5rX38wraUE
 
 
-## Sources
-The packages used by this application are specified in `requirements.txt`
+## Contributors
+This project was developed collaboratively by:
+- Lyn Yi Cheng
+- Simran Debnath
+- Daniel Holland
+- Brian Jalleh
+- Susetta James
+- Seohyun (Jen) Kwon
+- Jasdeep Panum
+- Erikas Staugas
+- Yue (Michelle) Wang
 
-
-Task:
-Source 
-
-Navbar:
-https://getbootstrap.com/docs/4.0/components/navbar/ 
-
-Clearcache command:
-https://stackoverflow.com/questions/5942759/best-place-to-clear-cache-when-restarting-django-server
-
-Emails:
-https://stackoverflow.com/questions/33054658/django-sending-emails-with-links 
-
-Scroll Animation:
-https://www.youtube.com/watch?v=T33NN_pPeNI 
-
-Slide Show Animation:
-https://www.youtube.com/watch?v=qDww4CbxtD4&t=185s 
-
-CSS: 
-https://getbootstrap.com/docs/4.0/getting-started/introduction/
-
-Test Checkout View and Test Payout View: test with mock objects :
-https://docs.python.org/3/library/unittest.mock.html#patch 
-https://docs.python.org/3/library/unittest.mock.html#unittest.mock.MagicMock 
-
-Checkout View: handle Stripe errors:
-https://stripe.com/docs/api/errors/handling  
-
-Create Stripe customer and retrieve Stripe customer:
-https://stripe.com/docs/api/customers/create  
-
-Attach payment method to customer:
-https://stripe.com/docs/api/payment_methods/attach  
-
-Modify Stripe customer:
-https://stripe.com/docs/api/customers/update  
-
-Create a payment method using JS; Initial payout:
-https://stripe.com/docs/payments/accept-a-payment-synchronously?locale=en-GB  
-
-Retrieve payment method:
-https://stripe.com/docs/api/payment_methods/retrieve?lang=python 
-
-User Registration Email:
-https://pylessons.com/django-email-confirm
-
-
-## Access credentials
-
-Student Account: 
-- Email: joe.doe@kcl.ac.uk 
-- Password: Password123 
-- (Better to use actual email to receive emails) 
-
-Society Account: 
-- Email: robotics@kcl.ac.uk 
-- Password: Password123 
-
-Student Union Account: 
-- Username: kclsu@kcl.ac.uk 
-- Password: Password123
-
-
-## Important
-Our reports contain the following:
-- What the application can and can't do for each account
-- The code coverage
-- The relevant details to check the functionality
-- Set up instructions
