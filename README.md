@@ -1,4 +1,4 @@
-# Ticket Selling Platform
+# Ticket Selling Platform (Tixstar)
 
 A full-stack web application that enables university students to discover, manage and purchase society event tickets online. Supports different user roles including students, societies and university student union administrators.
 
